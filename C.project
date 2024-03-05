@@ -66,37 +66,44 @@ int main()
 
 int main() 
 {
+
+  int stroka, stolb;
+
+  printf("Введите значение для строки массива");
+  scanf("%d", &stroka);
     
-    double array[3][3];
-    double sum_main = 0;
-    double sum_secondary = 0;
+  printf("Введите значение для столбца массива");
+  scanf("%d", &stolb);  
 
-    printf("Введите значения элементов матрицы 3x3:\n");
+  double array[stroka][stolb];
+  double sum_main = 0;
+  double sum_secondary = 0;
 
-    for (int i = 0; i < 3; i++) 
-    {
+
+  for (int i = 0; i < 3; i++) 
+  {
         
-        for (int j = 0; j < 3; j++) 
-        {
+      for (int j = 0; j < 3; j++) 
+      {
             
-            printf("Задайте значение элементу [%d][%d]: ", i, j);
-            scanf("%lf", &array[i][j]);
+          printf("Задайте значение элементу [%d][%d]: ", i, j);
+          scanf("%lf", &array[i][j]);
             
-            if (i == j) 
-            {
+          if (i == j) 
+          {
                 
-                sum_main += array[i][j];
+              sum_main += array[i][j];
                 
-            }
+          }
             
-            if (i + j == 2) 
-            {
+          if (i + j == stroka - 1) 
+          {
                 
-                sum_secondary += array[i][j];
+              sum_secondary += array[i][j];
                 
-            }
-        }
-    }
+          }
+      }
+  }
     
     printf("Исходная матрица:\n");
     for (int i = 0; i < 3; i++) 
@@ -189,5 +196,16 @@ int main()
 
   return 0;
 }
+
+--------------------------------------------------------------------------------------------------
+
+// Лабораторная №4
+
+#include <stdio.h>
+
+
+
+
+
 
 
