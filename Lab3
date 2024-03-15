@@ -1,0 +1,22 @@
+#include <stdio.h>
+#include <ctype.h>
+
+int main()
+{
+
+  char StrArray[81];
+  
+  printf("Введите строчку, которая содержит символы 'a', 'b':");
+  scanf("%80s", StrArray);
+
+  for(int i = 0, StrArray[i] != '\0', i++)
+  {
+    if(StrArray[i] == 'a' || StrArray[i] == 'b')
+    {
+        StrArray[i] = toupper(StrArray[i]);
+    }
+  }
+  printf("Новая строка: %s", StrArray)
+
+  return 0;
+}
