@@ -1,0 +1,110 @@
+// Задание 1 
+
+#include <stdio.h>
+
+int main() 
+{
+
+  int stroka, stolb;
+
+  printf("Введите значение для строки массива");
+  scanf("%d", &stroka);
+    
+  printf("Введите значение для столбца массива");
+  scanf("%d", &stolb);  
+
+  double array[stroka][stolb];
+  double sum_main = 0;
+  double sum_secondary = 0;
+
+
+  for (int i = 0; i < 3; i++) 
+  {
+        
+      for (int j = 0; j < 3; j++) 
+      {
+            
+          printf("Задайте значение элементу [%d][%d]: ", i, j);
+          scanf("%lf", &array[i][j]);
+            
+          if (i == j) 
+          {
+                
+              sum_main += array[i][j];
+                
+          }
+            
+          if (i + j == stroka - 1) 
+          {
+                
+              sum_secondary += array[i][j];
+                
+          }
+      }
+  }
+    
+    printf("Исходная матрица:\n");
+    for (int i = 0; i < 3; i++) 
+    {
+        
+        for (int j = 0; j < 3; j++) 
+        {
+            
+            printf("%.2lf ", array[i][j]);
+            
+        }
+        printf("\n");
+        
+    }
+
+    printf("Сумма элементов на главной диагонали: %.2lf\n", sum_main);
+    printf("Сумма элементов на побочной диагонали: %.2lf\n", sum_secondary);
+
+    return 0;
+    
+}
+
+}
+
+// Задание 2 
+
+#include <stdio.h>
+
+int main() 
+{
+    
+    int array[2][2];
+    int square[2][2];
+
+    printf("Введите значения элементов матрицы 2x2:\n");
+
+    for (int i = 0; i < 2; i++) 
+    {
+        
+        for (int j = 0; j < 2; j++) 
+        {
+            
+            printf("Элемент [%d][%d]: ", i, j);
+            scanf("%d", &array[i][j]);
+            
+        }
+    }
+
+    printf("Квадрат матрицы:\n");
+
+    for (int i = 0; i < 2; i++)
+    {
+        
+        for (int j = 0; j < 2; j++)
+        {
+        
+            square[i][j] = array[i][0] * array[0][j] + array[i][1] * array[1][j];
+            printf("%d ", square[i][j]);
+            
+        }
+        printf("\n");
+    }
+
+    return 0;
+    
+}
