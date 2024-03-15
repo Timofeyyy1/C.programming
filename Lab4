@@ -13,7 +13,7 @@ float Perimeter(float a, float b, float c)
     return a + b + c;
 }
 
-// Вычисляем площадь треугольника
+// Вычисляем площадь треугольника по формуле Герона
 float Area(float a, float b, float c)
 {
     float p = Perimeter(a, b, c) / 2;
