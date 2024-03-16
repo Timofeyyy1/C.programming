@@ -1,5 +1,5 @@
 // Вычисляем периметр треугольника
-float Perimeter(float a, float b, float c)
+int Perimeter(int side1, int side2, int side3)
 {
-    return a + b + c;
+    return side1 + side2 + side3;
 }
