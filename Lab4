@@ -5,35 +5,22 @@
 4) и выдать на консоль вычисленные с помощью написанных функций значения его периметра и площади. */
 
 #include <stdio.h>
-#include <math.h>
-
-// Вычисляем периметр треугольника
-float Perimeter(float a, float b, float c)
-{
-    return a + b + c;
-}
-
-// Вычисляем площадь треугольника по формуле Герона
-float Area(float a, float b, float c)
-{
-    float p = Perimeter(a, b, c) / 2;
-    return sqrt(p * (p - a) * (p - b) * (p - c));
-    
-}
+#include "mylib.h"
 
 int main()
 {
-    float a, b, c, P, S;
+    int a, b, c, P;
+    double S;
 
     //Вводим значения для сторон треугольника и выводим их на экран
     printf("Введите значение для 1 стороны: ");
-    scanf("%f", &a);
+    scanf("%d", &a);
 
     printf("Введите значение для 2 стороны: ");
-    scanf("%f", &b);
+    scanf("%d", &b);
 
     printf("Введите значение для 3 стороны: ");
-    scanf("%f", &c); 
+    scanf("%d", &c); 
 
     // Проверка неравенств сторон треугольника, ввод и вывод периметра и площади
     if (a + b > c && a + c > b && b + c > a)
@@ -41,8 +28,8 @@ int main()
         P = Perimeter(a, b, c);
         S = Area(a, b, c);
        
-        printf("Периметр равен: %.2f\n", P);
-        printf("Площадь равна: %.2f\n", S);
+        printf("Периметр равен: %d\n", P);
+        printf("Площадь равна: %.2lf\n", S);
     }
     else
     {
