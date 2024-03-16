@@ -1,0 +1,5 @@
+// Вычисляем периметр треугольника
+float Perimeter(float a, float b, float c)
+{
+    return a + b + c;
+}
