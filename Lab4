@@ -7,6 +7,14 @@
 #include <stdio.h>
 #include "mylib.h"
 
+bool istriangle(int a, int b, int c)
+{
+    if (a+b>c && a+c>b && b+c>a)
+        return True;
+    else
+        return False;
+}
+
 int main()
 {
     int a, b, c, P;
@@ -23,7 +31,7 @@ int main()
     scanf("%d", &c); 
 
     // Проверка неравенств сторон треугольника, ввод и вывод периметра и площади
-    if (a + b > c && a + c > b && b + c > a)
+    if (istriangle)
     {
         P = Perimeter(a, b, c);
         S = Area(a, b, c);
