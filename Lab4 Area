@@ -1,7 +1,0 @@
-// Вычисляем площадь треугольника по формуле Герона
-double Area(double side1, double side2, double side3)
-{
-    double p = Perimeter(side1, side2, side3) / 2;
-    return sqrt(p * (p - side1) * (p - side2) * (p - side3));
-    
-}
