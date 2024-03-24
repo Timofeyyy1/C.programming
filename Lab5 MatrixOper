@@ -6,9 +6,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+
+// Создаем функцию в динамической памяти
 double* MatrixOper(double* matrix1, double* matrix2, int n, char operation){
     double* result = malloc(n * n * sizeof(double));
-    
+
+    // Вычисляем операцию в зависимости от знака 
     for(int i = 0; i < n; i++)
     {
         for(int j = 0; j < n; j++)
@@ -37,30 +40,38 @@ double* MatrixOper(double* matrix1, double* matrix2, int n, char operation){
 
 int main()
 {
+    // Вводим размерность для матрицы
     int n;
     printf("Введите размерность матрицы: ");
     scanf("%d", &n);
-    
+
+    // Записываем переменные в динамической памяти
     double* matrix1 = malloc(n * n * sizeof(double));
     double* matrix2 = malloc(n * n * sizeof(double));
-    
+
+    // Цикл для считывания элементов первой матрицы и вывод их на экран
     printf("Введите элементы первой матрицы: \n");
     for(int i = 0; i < n * n; i++)
     {
         scanf("%lf", &matrix1[i]); 
     }
-    
+
+    // Цикл для считывания элементов второй матрицы и вывод их на экран
     printf("Введите элементы второй матрицы: \n");
     for(int i = 0; i < n * n; i++)
     {
         scanf("%lf", &matrix2[i]); 
     }
-    
+
+    // Выбор операции, затем ее вычисления
     char operation;
     printf("Введите какую операцию выполнить(+ - *): ");
     scanf(" %c", &operation);
-    
+
+    // Вывод функции
     double* result = MatrixOper(matrix1, matrix2, n, operation);
+
+    // Вывод результата операции
     printf("Результат: \n");
     for(int i = 0; i < n * n; i++)
     {
@@ -72,7 +83,7 @@ int main()
 
     }
     
-    
+    // Очищение памяти
     free(matrix1);
     free(matrix2);
     free(result);
