@@ -19,11 +19,11 @@ double* MatrixOper(double* matrix1, double* matrix2, int n, char operation){
             int index = i * n + j;
             if (operation == '+')
             {
-                result[index] = matrix1[index] + matrix2[index];
+                result[index] = matrix1[i] + matrix2[i];
             }
             else if (operation == '-')
             {
-                result[index] = matrix1[index] - matrix2[index];
+                result[index] = matrix1[i] - matrix2[i];
             }
             if (operation == '*')
             {
