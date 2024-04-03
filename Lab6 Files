@@ -1,0 +1,10 @@
+#include <stdio.h>
+#include <stlib.h>
+
+int main()
+{
+    FILE *file = fopen("Lab6.txt")
+    
+    
+    return 0;
+}
