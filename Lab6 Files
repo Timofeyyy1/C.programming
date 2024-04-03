@@ -1,10 +1,26 @@
 #include <stdio.h>
-#include <stlib.h>
 
 int main()
 {
-    FILE *file = fopen("Lab6.txt")
+    int year;
+    FILE *fileWrite = fopen("data.txt", "w");
+    char line[250];
     
+    fprintf(fileWrite, "Иванов Петр Сергеевич 1975\n");
+    fprintf(fileWrite, "Сидоров Николай Андреевич 1981\n");
+    fprintf(fileWrite, "...\n");
+    fprintf(fileWrite, "Воробьянинов Ипполит Матвеевич 1978\n");
+    
+    FILE *fileRead = fopen("data.txt", "r");
+    
+    while(fgets(line, sizeof(line), fileRead))
+    {
+        
+    }
+    
+    
+    fclose(fileWrite);
+    fclose(fileRead);
     
     return 0;
 }
