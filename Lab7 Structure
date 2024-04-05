@@ -10,9 +10,9 @@
 /*Создаем структуру характеристики человека для дальнейшего использования*/
 struct humen 
 {
-    char Name[20];
-    char Surname[20];
-    int year;
+    char Name[50];
+    char Surname[50];
+    int Year;
 };
 
 
@@ -24,7 +24,7 @@ int main()
     scanf("%d", &n);
 
     struct humen mass[n];
-
+    
     /*Используем цикл, чтобы узнать Имя, Фамилию и Год людей*/
 
     for(int i = 0; i < n; i++)
@@ -34,19 +34,31 @@ int main()
         printf("Введите фамилию: ");
         scanf("%s", mass[i].Surname);
         printf("Введите год рождения: ");
-        scanf("%d", &mass[i].year);
+        scanf("%d", &mass[i].Year);
     }
 
     /*Используем два цикла, чтобы упорядочить людей по их Году Рождения*/
-    for(int i = 0; i < 4; i++)
+    for(int i = 0; i < n; i++)
     {
-        for(int j = 0; j < 4; j++)
+        for(int j = i + 1; j < n; j++)
         {
             /*Используется метод пузырьком*/
-            if()
+            if(mass[i].Year > mass[j].Year)
+            {
+                struct humen sort = mass[i];
+                mass[i] = mass[j];
+                mass[j] = sort;
+            }
         }
     }
-    
+
+
+    /*Выводим результат на экран*/
+    printf("Результат: \n");
+    for(int i = 0; i < n; i++)
+    {
+        printf("Имя = %s; Фамилия = %s; Год = %d\n", mass[i].Name, mass[i].Surname, mass[i].Year);
+    }
     
     
     return 0;
