@@ -11,7 +11,7 @@
 struct humen 
 {
     char Name[50];
-    char Surname[50];
+    char Lastname[50];
     int Year;
 };
 
@@ -32,7 +32,7 @@ int main()
         printf("Введите имя: ");
         scanf("%s", mass[i].Name);
         printf("Введите фамилию: ");
-        scanf("%s", mass[i].Surname);
+        scanf("%s", mass[i].Lastname);
         printf("Введите год рождения: ");
         scanf("%d", &mass[i].Year);
     }
@@ -43,7 +43,7 @@ int main()
         for(int j = i + 1; j < n; j++)
         {
             /*Используется метод пузырьком*/
-            if(mass[i].Year > mass[j].Year)
+            if(mass[i].Year > mass[j].Lastname)
             {
                 struct humen sort = mass[i];
                 mass[i] = mass[j];
@@ -57,7 +57,7 @@ int main()
     printf("Результат: \n");
     for(int i = 0; i < n; i++)
     {
-        printf("Имя = %s; Фамилия = %s; Год = %d\n", mass[i].Name, mass[i].Surname, mass[i].Year);
+        printf("Имя = %s; Фамилия = %s; Год = %d\n", mass[i].Name, mass[i].Lastname, mass[i].Year);
     }
     
     
