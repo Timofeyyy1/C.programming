@@ -1,104 +1,105 @@
-// Двумерный массив
-
-
 #include <stdio.h>
 #include <stdlib.h>
 
-// Создаем функцию для вычисления операции над матрицами
-double** MatrixOper(double** matrix1, double** matrix2, int n, char operation){
-    double** result = malloc(n * sizeof(double*));
-    for (int i = 0; i < n; i++) {
-        result[i] = malloc(n * sizeof(double));
-    }
-
-    // Вычисляем операцию в зависимости от знака 
-    for(int i = 0; i < n; i++)
+// Функция для создания матрицы
+double** CreateMatrix(int n) 
+{
+    double** matrix = (double**)malloc(n * sizeof(double*));
+    for (int i = 0; i < n; i++)
     {
-        for(int j = 0; j < n; j++)
+        matrix[i] = (double*)malloc(n * sizeof(double));
+    }
+    return matrix;
+}
+
+// Функция для выполнения операций с матрицами
+double** MatrixOper(double** matrix1, double** matrix2, int n, char operation) 
+{
+    double** result = CreateMatrix(n);
+
+    // Выполнение операции в зависимости от заданного оператора
+    for (int i = 0; i < n; i++) 
+    {
+        for (int j = 0; j < n; j++) 
         {
-            if (operation == '+')
+            if (operation == '+') 
             {
                 result[i][j] = matrix1[i][j] + matrix2[i][j];
             }
-            else if (operation == '-')
+            else if (operation == '-') 
             {
                 result[i][j] = matrix1[i][j] - matrix2[i][j];
             }
-            else if (operation == '*')
+            else if (operation == '*') 
             {
                 result[i][j] = 0;
-                for(int k = 0; k < n; k++)
+                for (int k = 0; k < n; k++) 
                 {
                     result[i][j] += matrix1[i][k] * matrix2[k][j];
-                } 
+                }
             }
         }
     }
-   
-   return result;
+
+    return result;
 }
 
-// Функция для вывода матрицы на экран
-void PrintMatrix(int n, double** matrix)
+// Функция для вывода матрицы
+void PrintMatrix(int n, double** matrix) 
 {
-    for(int i = 0; i < n; i++)
-    {  
-        for(int j = 0; j < n; j++)
+    for (int i = 0; i < n; i++) 
+    {
+        for (int j = 0; j < n; j++) 
         {
             printf("%.2f ", matrix[i][j]);
         }
         printf("\n");
-    }    
+    }
 }
 
-int main()
-{
-    // Вводим размерность для матрицы
+int main() {
     int n;
     printf("Введите размерность матрицы: ");
     scanf("%d", &n);
 
-    // Записываем переменные в динамической памяти
-    double** matrix1 = malloc(n * sizeof(double*));
-    double** matrix2 = malloc(n * sizeof(double*));
-    for (int i = 0; i < n; i++) {
-        matrix1[i] = malloc(n * sizeof(double));
-        matrix2[i] = malloc(n * sizeof(double));
-    }
+    double** matrix1 = CreateMatrix(n);
+    double** matrix2 = CreateMatrix(n);
 
-    // Цикл для считывания элементов первой матрицы и вывод их на экран
+    // Ввод элементов для первой матрицы
     printf("Введите элементы первой матрицы: \n");
-    for(int i = 0; i < n; i++)
-    {   
-        for(int j = 0; j < n; j++)
+    for (int i = 0; i < n; i++) 
+    {
+        for (int j = 0; j < n; j++) 
         {
-            scanf("%lf", &matrix1[i][j]); 
-        }
-    }
-    // Цикл для считывания элементов второй матрицы и вывод их на экран
-    printf("Введите элементы второй матрицы: \n");
-    for(int i = 0; i < n; i++)
-    {   
-        for(int j = 0; j < n; j++)
-        {
-            scanf("%lf", &matrix2[i][j]); 
+            scanf("%lf", &matrix1[i][j]);
         }
     }
 
-    // Выбор операции, затем ее вычисления
+    // Ввод элементов для второй матрицы
+    printf("Введите элементы второй матрицы: \n");
+    for (int i = 0; i < n; i++) 
+    {
+        for (int j = 0; j < n; j++) 
+        {
+            scanf("%lf", &matrix2[i][j]);
+        }
+    }
+
+    // Выбор операции для выполнения
     char operation;
-    printf("Введите какую операцию выполнить (+ - *): ");
+    printf("Введите операцию для выполнения (+ - *): ");
     scanf(" %c", &operation);
 
-    // Вычисление результата операции
+    // Выполнение операции над матрицами
     double** result = MatrixOper(matrix1, matrix2, n, operation);
 
     // Вывод результата операции
     printf("Результат операции:\n");
     PrintMatrix(n, result);
-    
-    // Очищение памяти
-    for (int i = 0; i < n; i++) {
+
+    // Освобождение выделенной памяти для матриц
+    for (int i = 0; i < n; i++) 
+    {
         free(matrix1[i]);
         free(matrix2[i]);
         free(result[i]);
@@ -106,6 +107,6 @@ int main()
     free(matrix1);
     free(matrix2);
     free(result);
-    
+
     return 0;
 }
