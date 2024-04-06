@@ -3,7 +3,7 @@
 int main()
 {
     int year;
-    char Imya[50], Familiya[50], Otchestvo[50];
+    char Imya[50], Familiya[50], Otchestvo[50], line[100];
     
     FILE *fileWrite = fopen("data.txt", "w");
     fprintf(fileWrite, "Иванов Петр Сергеевич 1975\n");
@@ -14,8 +14,9 @@ int main()
     FILE *fileRead = fopen("data.txt", "r");
     FILE *fileResult = fopen("output.txt", "w");
     
-    while (fscanf(fileRead, "%s %s %s %d", Imya, Familiya, Otchestvo, &year) != EOF)
+    while (fgets(line, sizeof(line), fileRead))
     {
+        sscanf(line, "%s %s %s %d", Imya, Familiya, Otchestvo, &year);
         if (year > 1980)
         {
             fprintf(fileResult, "%s %s %s %d\n", Imya, Familiya, Otchestvo, year);
@@ -23,7 +24,7 @@ int main()
     }
     
     fclose(fileRead);
-    fclose(fileOutput);
+    fclose(fileResult);
     
     return 0;
 }
