@@ -28,3 +28,39 @@ int main()
     
     return 0;
 }
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+#include <stdio.h>
+
+int main()
+{
+    int year;
+    char Imya[50], Familiya[50], Otchestvo[50], line[100];
+    
+    FILE *fileWrite = fopen("data.txt", "w");
+    fprintf(fileWrite, "Aнтонов Петр Сергеевич 1983\n");
+    fprintf(fileWrite, "Aндреев Петр Сергеевич 1983\n");
+    fprintf(fileWrite, "Иванов Петр Сергеевич 1975\n");
+    fprintf(fileWrite, "Сидоров Николай Андреевич 1981\n");
+    fprintf(fileWrite, "Воробьянинов Ипполит Матвеевич 1978\n");
+    fclose(fileWrite);
+    
+    FILE *fileRead = fopen("data.txt", "r");
+    FILE *fileResult = fopen("output.txt", "w");
+    
+    while (fgets(line, sizeof(line), fileRead))
+    {   
+        sscanf(line, "%s %s %s %d", Familiya, Imya, Otchestvo, &year);
+        if (Familiya[0] == 'A')
+        {
+            fprintf(fileResult, "%s %s %s %d\n", Familiya, Imya, Otchestvo, year);
+        }
+    }
+    
+    fclose(fileRead);
+    fclose(fileResult);
+    
+    return 0;
+}
+
