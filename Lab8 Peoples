@@ -1,1 +1,120 @@
-#include <stdio.h
+/*
+1)Создать текстовый файл с записями, включающие имя/фамилию человека, год рождения, пол и рост (в метрах).(выполнено)
+2)Упорядочить элементы по году рождения, име-ни/фамилии, полу или росту. 
+3)Вывести результат.
+4)Указать элемент, по которому следует упорядочить, через консоль. (выполнено)
+5)А также реализовать возможность задавать несколько полей для упорядочивания.  
+*/
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+
+
+struct person 
+{
+    char Name[50];
+    char Lastname[50];
+    int BirthYear;
+    char Gender;
+    float Height;
+};
+
+int cmpName(const void* a, const void* b)
+{
+    struct person* personA = (struct person*)a;
+    struct person* personB = (struct person*)b;
+    return personA -> Name - personB - Name;
+}
+
+int cmpLastname(const void* a, const void* b)
+{
+    struct person* personA = (struct person*)a;
+    struct person* personB = (struct person*)b;
+    return personA -> Lastname - personB - Lastname;
+}
+
+int cmpBirthYear(const void* a, const void* b)
+{
+    struct person* personA = (struct person*)a;
+    struct person* personB = (struct person*)b;
+    return personA -> BirthYear - personB - BirthYear;
+}
+
+int cmpGender(const void* a, const void* b)
+{
+    struct person* personA = (struct person*)a;
+    struct person* personB = (struct person*)b;
+    return personA -> Gender - personB - Gender;
+}
+
+int cmpHeight(const void* a, const void* b)
+{
+    struct person* personA = (struct person*)a;
+    struct person* personB = (struct person*)b;
+    return personA -> Height - personB - Height;
+}
+
+
+int main()
+{
+    int data;
+    
+    printf("Введите размерность строк: ");
+    scanf("%d", &data);
+
+    struct person* people = (struct person*)malloc(data*sizeof(struct person));
+    
+     for(int i = 0; i < data; i++)
+    {
+        printf("Введите имя: ");
+        scanf("%s", people[i].Name);
+        printf("Введите фамилию: ");
+        scanf("%s", people[i].Lastname);
+        printf("Введите год рождения: ");
+        scanf("%d", &people[i].BirthYear);
+        printf("Введите пол(М или Ж): ");
+        scanf(" %c", &people[i].Gender);
+        printf("Введите рост(в метрах): ");
+        scanf("%f", &people[i].Height);
+    }
+    
+    int sort;
+    printf ("Если хотите отсортировать по имени, напишите 1"
+    "Если хотите отсортировать по фамилии, напишите 2"
+    "Если хотите отсортировать по году, напишите 3"
+    "Если хотите отсортировать по полу, напишите 4"
+    "Если хотите отсортировать по росту, напишите 5");
+    scanf("%d", &sort);        
+    
+    
+    if(sort == '1')
+    {
+        qsort(); 
+    }
+    
+    else if(sort == '2')
+    {
+        qsort(); 
+    }
+    
+    else if(sort == '3')
+    {
+        qsort(); 
+    }
+    
+    else if(sort == '4')
+    {
+        qsort(); 
+    }
+    
+    else if(sort == '5')
+    {
+        qsort(); 
+    }
+    
+            
+            
+    return 0;
+}
