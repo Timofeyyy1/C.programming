@@ -8,9 +8,6 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
-
-
 
 struct person 
 {
@@ -21,39 +18,39 @@ struct person
     float Height;
 };
 
-int cmpName(const void* a, const void* b)
+int cmpName(const void *a, const void *b)
 {
     struct person* personA = (struct person*)a;
     struct person* personB = (struct person*)b;
-    return personA -> Name - personB - Name;
+    return personA -> Name - personB -> Name;
 }
 
-int cmpLastname(const void* a, const void* b)
+int cmpLastname(const void *a, const void *b)
 {
     struct person* personA = (struct person*)a;
     struct person* personB = (struct person*)b;
-    return personA -> Lastname - personB - Lastname;
+    return personA -> Lastname - personB -> Lastname;
 }
 
-int cmpBirthYear(const void* a, const void* b)
+int cmpBirthYear(const void *a, const void *b)
 {
     struct person* personA = (struct person*)a;
     struct person* personB = (struct person*)b;
-    return personA -> BirthYear - personB - BirthYear;
+    return personA->BirthYear - personB -> BirthYear;
 }
 
-int cmpGender(const void* a, const void* b)
+int cmpGender(const void *a, const void *b)
 {
     struct person* personA = (struct person*)a;
     struct person* personB = (struct person*)b;
-    return personA -> Gender - personB - Gender;
+    return personA -> Gender - personB -> Gender;
 }
 
-int cmpHeight(const void* a, const void* b)
+int cmpHeight(const void *a, const void *b)
 {
     struct person* personA = (struct person*)a;
     struct person* personB = (struct person*)b;
-    return personA -> Height - personB - Height;
+    return personA -> Height - personB -> Height;
 }
 
 
@@ -81,38 +78,42 @@ int main()
     }
     
     int sort;
-    printf ("Если хотите отсортировать по имени, напишите 1"
-    "Если хотите отсортировать по фамилии, напишите 2"
-    "Если хотите отсортировать по году, напишите 3"
-    "Если хотите отсортировать по полу, напишите 4"
-    "Если хотите отсортировать по росту, напишите 5");
+    printf ("Сортировка по(Имя - 1, Фамилия - 2, Год - 3, Пол - 4, Рост - 5): ");
     scanf("%d", &sort);        
     
     
-    if(sort == '1')
+    if(sort == 1)
     {
-        qsort(); 
+        qsort(people, data, sizeof(struct person), cmpName); 
     }
     
-    else if(sort == '2')
+    else if(sort == 2)
     {
-        qsort(); 
+        qsort(people, data, sizeof(struct person), cmpLastname); 
     }
     
-    else if(sort == '3')
+    else if(sort == 3)
     {
-        qsort(); 
+        qsort(people, data, sizeof(struct person), cmpBirthYear); 
     }
     
-    else if(sort == '4')
+    else if(sort == 4)
     {
-        qsort(); 
+        qsort(people, data, sizeof(struct person), cmpGender); 
     }
     
-    else if(sort == '5')
+    else if(sort == 5)
     {
-        qsort(); 
+        qsort(people, data, sizeof(struct person), cmpHeight); 
     }
+    
+    printf("Вывод результата: \n");
+    for(int i = 0; i < data; i++)
+    {
+        printf("%s, %s, %d, %c, %.2f", people[i].Name, people[i].Lastname, people[i].BirthYear, people[i].Gender,people[i].Height);
+    }
+    
+    free(people);
     
             
             
