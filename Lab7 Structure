@@ -1,146 +1,121 @@
 /*
-1)Объявить тип-структуру humen, включающую имя человека, фамилию и год рождения.
-2)Объявить два массива из четырёх элементов типа humen.
-3)Ввести с консоли или из файла элементы одного массива и построить на их основе другой, упорядочив элементы по годам рождения.
-4)Вывести результат.
-*/
-
-#include <stdio.h>
-
-/*Создаем структуру характеристики человека для дальнейшего использования*/
-struct humen 
-{
-    char Name[50];
-    char Lastname[50];
-    int Year;
-};
-
-
-int main()
-{
-    int n;
-    
-    printf("Введите размерность массива: ");
-    scanf("%d", &n);
-
-    struct humen mass[n];
-    
-    /*Используем цикл, чтобы узнать Имя, Фамилию и Год людей*/
-
-    for(int i = 0; i < n; i++)
-    {
-        printf("Введите имя: ");
-        scanf("%s", mass[i].Name);
-        printf("Введите фамилию: ");
-        scanf("%s", mass[i].Lastname);
-        printf("Введите год рождения: ");
-        scanf("%d", &mass[i].Year);
-    }
-
-    /*Используем два цикла, чтобы упорядочить людей по их Году Рождения*/
-    for(int i = 0; i < n; i++)
-    {
-        for(int j = i + 1; j < n; j++)
-        {
-            /*Используется метод пузырьком*/
-            if(mass[i].Year > mass[j].Lastname)
-            {
-                struct humen sort = mass[i];
-                mass[i] = mass[j];
-                mass[j] = sort;
-            }
-        }
-    }
-
-
-    /*Выводим результат на экран*/
-    printf("Результат: \n");
-    for(int i = 0; i < n; i++)
-    {
-        printf("Имя = %s; Фамилия = %s; Год = %d\n", mass[i].Name, mass[i].Lastname, mass[i].Year);
-    }
-    
-    
-    return 0;
-}
-
----------------------------------------------------------------------------------------------------------------------------------------------------------
-
-
-/*
-1)Объявить тип-структуру humen, включающую имя человека, фамилию и год рождения.
-2)Объявить два массива из четырёх элементов типа humen.
-3)Ввести с консоли или из файла элементы одного массива и построить на их основе другой, упорядочив элементы по годам рождения.
-4)Вывести результат.
+1)Создать текстовый файл с записями, включающие имя/фамилию человека, год рождения, пол и рост (в метрах).(выполнено)
+2)Упорядочить элементы по году рождения, име-ни/фамилии, полу или росту. 
+3)Вывести результат.
+4)Указать элемент, по которому следует упорядочить, через консоль. (выполнено)
+5)А также реализовать возможность задавать несколько полей для упорядочивания.  
 */
 
 #include <stdio.h>
 #include <stdlib.h>
 
-/*Создаем структуру характеристики человека для дальнейшего использования*/
-struct humen 
+struct person 
 {
     char Name[50];
     char Lastname[50];
-    int Year;
+    int BirthYear;
+    char Gender;
+    float Height;
 };
 
-int sort(const void *a, const void *b)
+int cmpName(const void *a, const void *b)
 {
-    return  ((struct humen*)a) -> Year - ((struct humen*)b) -> Year;
+    struct person* personA = (struct person*)a;
+    struct person* personB = (struct person*)b;
+    return personA -> Name - personB -> Name;
 }
+
+int cmpLastname(const void *a, const void *b)
+{
+    struct person* personA = (struct person*)a;
+    struct person* personB = (struct person*)b;
+    return personA -> Lastname - personB -> Lastname;
+}
+
+int cmpBirthYear(const void *a, const void *b)
+{
+    struct person* personA = (struct person*)a;
+    struct person* personB = (struct person*)b;
+    return personA->BirthYear - personB -> BirthYear;
+}
+
+int cmpGender(const void *a, const void *b)
+{
+    struct person* personA = (struct person*)a;
+    struct person* personB = (struct person*)b;
+    return personA -> Gender - personB -> Gender;
+}
+
+int cmpHeight(const void *a, const void *b)
+{
+    struct person* personA = (struct person*)a;
+    struct person* personB = (struct person*)b;
+    return personA -> Height - personB -> Height;
+}
+
 
 int main()
 {
-    int n;
+    int data;
     
-    printf("Введите размерность массива: ");
-    scanf("%d", &n);
+    printf("Введите размерность строк: ");
+    scanf("%d", &data);
 
-    struct humen mass[n];
+    struct person* people = (struct person*)malloc(data*sizeof(struct person));
     
-    /*Используем цикл, чтобы узнать Имя, Фамилию и Год людей*/
-
-    for(int i = 0; i < n; i++)
+     for(int i = 0; i < data; i++)
     {
         printf("Введите имя: ");
-        scanf("%s", mass[i].Name);
+        scanf("%s", people[i].Name);
         printf("Введите фамилию: ");
-        scanf("%s", mass[i].Lastname);
+        scanf("%s", people[i].Lastname);
         printf("Введите год рождения: ");
-        scanf("%d", &mass[i].Year);
+        scanf("%d", &people[i].BirthYear);
+        printf("Введите пол(М или Ж): ");
+        scanf(" %c", &people[i].Gender);
+        printf("Введите рост(в метрах): ");
+        scanf("%f", &people[i].Height);
     }
-
-    /*Используем два цикла, чтобы упорядочить людей по их Году Рождения*/
-    qsort(mass, n, sizeof(struct humen), sort);
-
-
-    /*Выводим результат на экран*/
-    printf("Результат: \n");
-    for(int i = 0; i < n; i++)
+    
+    int sort;
+    printf ("Сортировка по(Имя - 1, Фамилия - 2, Год - 3, Пол - 4, Рост - 5): ");
+    scanf("%d", &sort);        
+    
+    
+    if(sort == 1)
     {
-        printf("Имя = %s; Фамилия = %s; Год = %d\n", mass[i].Name, mass[i].Lastname, mass[i].Year);
+        qsort(people, data, sizeof(struct person), cmpName); 
     }
     
+    else if(sort == 2)
+    {
+        qsort(people, data, sizeof(struct person), cmpLastname); 
+    }
     
+    else if(sort == 3)
+    {
+        qsort(people, data, sizeof(struct person), cmpBirthYear); 
+    }
+    
+    else if(sort == 4)
+    {
+        qsort(people, data, sizeof(struct person), cmpGender); 
+    }
+    
+    else if(sort == 5)
+    {
+        qsort(people, data, sizeof(struct person), cmpHeight); 
+    }
+    
+    printf("Вывод результата: \n");
+    for(int i = 0; i < data; i++)
+    {
+        printf("%s, %s, %d, %c, %.2f", people[i].Name, people[i].Lastname, people[i].BirthYear, people[i].Gender,people[i].Height);
+    }
+    
+    free(people);
+    
+            
+            
     return 0;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
