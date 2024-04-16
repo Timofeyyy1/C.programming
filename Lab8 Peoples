@@ -110,7 +110,7 @@ int main()
     printf("Вывод результата: \n");
     for(int i = 0; i < data; i++)
     {
-        printf("%s, %s, %d, %c, %.2f", people[i].Name, people[i].Lastname, people[i].BirthYear, people[i].Gender,people[i].Height);
+        printf("%s, %s, %d, %c, %.2f\n", people[i].Name, people[i].Lastname, people[i].BirthYear, people[i].Gender,people[i].Height);
     }
     
     free(people);
