@@ -1,0 +1,17 @@
+struct Person* personA = (struct Person*)a;
+    struct Person* personB = (struct Person*)b;
+    
+    int cmpName = strcmp(personA -> Name, personB -> Name);
+    if (cmpName) 
+    {
+        return cmpName;
+    }
+    
+    int cmpLastname = strcmp(personA -> Lastname, personB -> Lastname);
+    if (cmpLastname) 
+    {
+        return cmpLastname;
+    }
+    
+    return personA-> y, personB-> y;
+    
