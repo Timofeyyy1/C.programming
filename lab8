@@ -1,8 +1,3 @@
-/*Создать текстовый файл с записями, включающие имя/фамилию человека, год рождения, пол и рост (в метрах).
-Упорядочить элементы по году рождения, име-ни/фамилии, полу или росту.
-Вывести результат. Указать элемент, по которому следует упорядочить, через консоль.
-А также реализовать возможность задавать несколько по-лей для упорядочивания.*/
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -35,13 +30,13 @@ int compareByGender(const void* a, const void* b) {
 int compareByHeight(const void* a, const void* b) {
     const Person* personA = (const Person*)a;
     const Person* personB = (const Person*)b;
-    return personA->height - personB->height;
+    return (personA->height > personB->height) - (personA->height < personB->height);
 }
 
 int main() {
     FILE* file = fopen("people.txt", "r");
     if (file == NULL) {
-        printf("Failed to open file.\n");
+        printf("Не удалось открыть файл.\n");
         return 1;
     }
 
@@ -61,14 +56,14 @@ int main() {
     int sortByGender = 0;
     int sortByHeight = 0;
 
-    printf("Enter sorting parameters (1 - sort, 0 - do not sort):\n");
-    printf("Sort by birth year: ");
+    printf("Введите параметры сортировки (1 - сортировать, 0 - не сортировать):\n");
+    printf("Сортировать по году рождения: ");
     scanf("%d", &sortByBirthYear);
-    printf("Sort by name: ");
+    printf("Сортировать по имени: ");
     scanf("%d", &sortByName);
-    printf("Sort by gender: ");
+    printf("Сортировать по полу: ");
     scanf("%d", &sortByGender);
-    printf("Sort by height: ");
+    printf("Сортировать по росту: ");
     scanf("%d", &sortByHeight);
 
     if (sortByBirthYear) {
@@ -84,7 +79,7 @@ int main() {
         qsort(people, numPeople, sizeof(Person), compareByHeight);
     }
 
-    printf("Sorting result:\n");
+    printf("Результат сортировки:\n");
     for (int i = 0; i < numPeople; i++) {
         printf("%s %d %c %.2f\n", people[i].name, people[i].birthYear, people[i].gender, people[i].height);
     }
