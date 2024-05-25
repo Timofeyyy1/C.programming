@@ -1,0 +1,70 @@
+#include <stdio.h>
+#include <stdarg.h>
+
+// Функция для вычисления суммы переменного количества аргументов
+double sum(int num, ...) {
+    va_list args;
+    va_start(args, num);
+
+    double result = 0;
+    for (int i = 0; i < num; i++) {
+        result += va_arg(args, double);
+    }
+
+    va_end(args);
+    return result;
+}
+
+double max(int num, ...) {
+    va_list args;
+    va_start(args, num);
+
+    double maximum = va_arg(args, double);
+    for (int i = 1; i < num; i++) {
+        double current = va_arg(args, double);
+        if (current > maximum) {
+            maximum = current;
+        }
+    }
+
+    va_end(args);
+    return maximum;
+}
+
+double min(int num, ...) {
+    va_list args;
+    va_start(args, num);
+
+    double minimum = va_arg(args, double);
+    for (int i = 1; i < num; i++) {
+        double current = va_arg(args, double);
+        if (current < minimum) {
+            minimum = current;
+        }
+    }
+
+    va_end(args);
+    return minimum;
+}
+
+double average(int num, ...) {
+    va_list args;
+    va_start(args, num);
+
+    double total = 0;
+    for (int i = 0; i < num; i++) {
+        total += va_arg(args, double);
+    }
+
+    va_end(args);
+    return total / num;
+}
+
+int main() {
+    printf("Сумма: %.2f\n", sum(4, 5.5, 2.2, 10.1, 8.8));
+    printf("Максимум: %.2f\n", max(4, 5.5, 2.2, 10.1, 8.8));
+    printf("Минимум: %.2f\n", min(4, 5.5, 2.2, 10.1, 8.8));
+    printf("Среднее арифметическое: %.2f\n", average(4, 5.5, 2.2, 10.1, 8.8));
+
+    return 0;
+}
