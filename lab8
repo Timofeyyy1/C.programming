@@ -4,21 +4,29 @@
 
 typedef struct {
     char name[50];
+    char Lastname[50];
     int birthYear;
     char gender;
     float height;
 } Person;
 
-int compareByBirthYear(const void* a, const void* b) {
-    const Person* personA = (const Person*)a;
-    const Person* personB = (const Person*)b;
-    return personA->birthYear - personB->birthYear;
-}
 
 int compareByName(const void* a, const void* b) {
     const Person* personA = (const Person*)a;
     const Person* personB = (const Person*)b;
     return strcmp(personA->name, personB->name);
+}
+
+int compareByLastname(const void* a, const void* b) {
+    const Person* personA = (const Person*)a;
+    const Person* personB = (const Person*)b;
+    return strcmp(personA->Lastname, personB->Lastname);
+}
+
+int compareByBirthYear(const void* a, const void* b) {
+    const Person* personA = (const Person*)a;
+    const Person* personB = (const Person*)b;
+    return personA->birthYear - personB->birthYear;
 }
 
 int compareByGender(const void* a, const void* b) {
@@ -45,7 +53,7 @@ int main() {
 
     char line[100];
     while (fgets(line, sizeof(line), file)) {
-        sscanf(line, "%s %d %c %f", people[numPeople].name, &people[numPeople].birthYear, &people[numPeople].gender, &people[numPeople].height);
+        sscanf(line, "%s %s %d %c %f", people[numPeople].name, people[numPeople].Lastname, &people[numPeople].birthYear, &people[numPeople].gender, &people[numPeople].height);
         numPeople++;
     }
 
@@ -53,24 +61,30 @@ int main() {
 
     int sortByBirthYear = 0;
     int sortByName = 0;
+    int sortByLastname = 0;
     int sortByGender = 0;
     int sortByHeight = 0;
 
-    printf("Введите параметры сортировки (1 - сортировать, 0 - не сортировать):\n");
-    printf("Сортировать по году рождения: ");
-    scanf("%d", &sortByBirthYear);
+    printf("Введите параметры сортировки (0 - нет, 1 - да):\n");
     printf("Сортировать по имени: ");
     scanf("%d", &sortByName);
+    printf("Сортировать по году фамилии: ");
+    scanf("%d", &sortByLastname);
+    printf("Сортировать по году рождения: ");
+    scanf("%d", &sortByBirthYear);
     printf("Сортировать по полу: ");
     scanf("%d", &sortByGender);
     printf("Сортировать по росту: ");
     scanf("%d", &sortByHeight);
 
-    if (sortByBirthYear) {
-        qsort(people, numPeople, sizeof(Person), compareByBirthYear);
-    }
     if (sortByName) {
         qsort(people, numPeople, sizeof(Person), compareByName);
+    }
+    if (sortByLastname) {
+        qsort(people, numPeople, sizeof(Person), compareByLastname);
+    }
+    if (sortByBirthYear) {
+        qsort(people, numPeople, sizeof(Person), compareByBirthYear);
     }
     if (sortByGender) {
         qsort(people, numPeople, sizeof(Person), compareByGender);
@@ -81,7 +95,7 @@ int main() {
 
     printf("Результат сортировки:\n");
     for (int i = 0; i < numPeople; i++) {
-        printf("%s %d %c %.2f\n", people[i].name, people[i].birthYear, people[i].gender, people[i].height);
+        printf("%s %s %d %c %.2f\n", people[i].name, people[i].Lastname, people[i].birthYear, people[i].gender, people[i].height);
     }
 
     return 0;
