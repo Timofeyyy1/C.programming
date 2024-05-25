@@ -7,7 +7,7 @@ struct person
     char Name[50];
     char Lastname[50];
     int BirthYear;
-    char Gender;
+    char Gender[2];
     float Height;
 };
 
@@ -30,8 +30,8 @@ int comparePersons(const void *a, const void *b)
         return personA->BirthYear - personB->BirthYear;
     }
 
-    if (personA->Gender != personB->Gender) {
-        return personA->Gender - personB->Gender;
+    if (strcmp(personA->Gender, personB->Gender) != 0) {
+        return strcmp(personA->Gender, personB->Gender);
     }
 
     if (personA->Height != personB->Height) {
@@ -59,7 +59,7 @@ int main()
         printf("Введите год рождения: ");
         scanf("%d", &people[i].BirthYear);
         printf("Введите пол (M или F): ");
-        scanf(" %c", &people[i].Gender);
+        scanf("%s", people[i].Gender);
         printf("Введите рост (в метрах): ");
         scanf("%f", &people[i].Height);
     }
@@ -77,7 +77,7 @@ int main()
     printf("Отсортированный результат: \n");
     for(int i = 0; i < data; i++)
     {
-        printf("%s, %s, %d, %c, %.2f\n", people[i].Name, people[i].Lastname, people[i].BirthYear, people[i].Gender, people[i].Height);
+        printf("%s, %s, %d, %s, %.2f\n", people[i].Name, people[i].Lastname, people[i].BirthYear, people[i].Gender, people[i].Height);
     }
     
     free(people);
