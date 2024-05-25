@@ -16,7 +16,6 @@ int comparePersons(const void *a, const void *b)
     struct person* personA = (struct person*)a;
     struct person* personB = (struct person*)b;
 
-
     int nameComparison = strcmp(personA->Name, personB->Name);
     if (nameComparison != 0) {
         return nameComparison;
@@ -67,11 +66,12 @@ int main()
     
     printf("Введите варианты сортировки (например, 1 3 5 для сортировки по имени, году рождения и росту): \n");
     
-    int sortOptions[] = {};
+    int sortOptions[data];
     for (int i = 0; i < data; i++) {
         scanf("%d", &sortOptions[i]);
     }
 
+    // Сортировка по заданным критериям
     qsort(people, data, sizeof(struct person), comparePersons);
 
     printf("Отсортированный результат: \n");
