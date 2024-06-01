@@ -13,11 +13,11 @@ void generate_matrix(FILE *file, int size){
     fprintf(file, "\n");
 }
 
-//Считываем числа 
+//Считываем числа и создаем для них матрицу
 void read_matrix(FILE *file, int size, int matrix[size][size]){
     for(int i = 0; i < size; i++){
         for(int j = 0; j < size; j++){
-            fscanf(file, "%d", &matrix[i][j]);
+            fscanf(file, "%d ", &matrix[i][j]);
         }
     }
 }
@@ -35,7 +35,7 @@ void Ymnoj_matrix(int size, int matrix1[size][size], int matrix2[size][size], in
 }
 
 //Функция сложения матриц
-void Summ_matrices(int size, int matrix1[size][size], int matrix2[size][size], int result[size][size]) {
+void Summ_matrix(int size, int matrix1[size][size], int matrix2[size][size], int result[size][size]) {
     for (int i = 0; i < size; i++) {
         for (int j = 0; j < size; j++) {
             result[i][j] = matrix1[i][j] + matrix2[i][j];
@@ -47,13 +47,14 @@ void Summ_matrices(int size, int matrix1[size][size], int matrix2[size][size], i
 int main()
 {
     //Время старта программы
-    double time_spent = 0.0;
+    float time_spent = 0.0;
     clock_t start = clock();
     
     int size;
-    int matrix1[size][size], matrix2[size][size], result[size][size];
     printf("Введите размерность матрицы: ");
     scanf("%d", &size);
+    
+    int matrix1[size][size], matrix2[size][size], result[size][size];
     
     //Создаем файл, в который будем записывать наши сгенерированные числа
     FILE *input = fopen("input.txt", "w");
@@ -81,7 +82,7 @@ int main()
     fclose(output);
     
     //Вызов функции сложения
-    Summ_matrices(size, matrix1, matrix2, result);
+    Summ_matrix(size, matrix1, matrix2, result);
     
     //В файл записываем результат сложения наших матриц
     output = fopen("output.txt", "a");
@@ -96,7 +97,7 @@ int main()
     
     //Время закрытие программы
     clock_t end = clock();
-    time_spent = (double)(end - start) / CLOCKS_PER_SEC;
+    time_spent = (float)(end - start) / CLOCKS_PER_SEC;
     
     //Вывод на экран время работы программы
     printf("Время работы программы: %.5f секунд \n", time_spent);
