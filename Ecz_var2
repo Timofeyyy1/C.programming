@@ -1,0 +1,84 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+void writeToFile(int N) {
+    FILE *file;
+    file = fopen("input.txt", "w");
+    srand(time(0));
+    for (int i = 0; i < N; i++) {
+        fprintf(file, "%d ", rand() % 100);
+    }
+    fclose(file);
+}
+
+void readAndReplace() {
+    FILE *input, *output;
+    input = fopen("input.txt", "r");
+    output = fopen("output.txt", "w");
+    int num;
+    while (fscanf(input, "%d", &num) != EOF) {
+        if (num % 5 == 0 && num % 7 == 0) {
+            fprintf(output, "ПЯТЬСЕМЬ ");
+        } else if (num % 5 == 0) {
+            fprintf(output, "ПЯТЬ ");
+        } else if (num % 7 == 0) {
+            fprintf(output, "СЕМЬ ");
+        } else {
+            fprintf(output, "%d ", num);
+        }
+    }
+    fclose(input);
+    fclose(output);
+}
+
+void formMatrixAndSum(int N, int M) {
+    FILE *file;
+    file = fopen("input.txt", "r");
+    int matrix[N/M][M];
+    int num, i = 0, j = 0;
+    while (fscanf(file, "%d", &num) != EOF) {
+        matrix[i][j] = num;
+        j++;
+        if (j == M) {
+            i++;
+            j = 0;
+        }
+        if (i == N/M) {
+            break;
+        }
+    }
+    fclose(file);
+    int sumRow, sumCol;
+    for (int i = 0; i < N/M; i++) {
+        sumRow = 0;
+        for (int j = 0; j < M; j++) {
+            sumRow += matrix[i][j];
+        }
+        printf("Сумма строки %d: %d\n", i+1, sumRow);
+    }
+    for (int j = 0; j < M; j++) {
+        sumCol = 0;
+        for (int i = 0; i < N/M; i++) {
+            sumCol += matrix[i][j];
+        }
+        printf("Сумма столбца %d: %d\n", j+1, sumCol);
+    }
+    fclose(file);
+}
+
+int main() {
+    int N, M;
+    printf("Введите количество чисел N: ");
+    scanf("%d", &N);
+    printf("Введите количество столбцов M: ");
+    scanf("%d", &M);
+    clock_t start = clock();
+    writeToFile(N);
+    readAndReplace();
+    formMatrixAndSum(N, M);
+    clock_t end = clock();
+    double time_spent = (double)(end - start) / CLOCKS_PER_SEC;
+    printf("Время работы программы: %f секунд\n", time_spent);
+    return 0;
+}
