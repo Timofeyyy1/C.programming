@@ -1,0 +1,134 @@
+#include <iostream>
+#include "array.h"
+
+using namespace std;
+
+int main() {
+    Array arr;
+
+    arr.addArray(2);
+    arr.addArray(18);
+    arr.addArray(31);
+    arr.addArray(7);
+    arr.addArray(0);
+
+    arr.delArray();
+
+    std::cout << "Исходный массив: ";
+    arr.info(); // Call info() without returning a string
+
+    ++arr;
+    std::cout << "Изменненый массив (префиксный): ";
+    arr.info();
+
+    arr++;
+    std::cout << "Изменненый массив (постфиксный): ";
+    arr.info();
+
+    --arr;
+    std::cout << "Изменненый массив (префиксный): ";
+    arr.info();
+
+    arr--;
+    std::cout << "Изменненый массив (постфиксный): ";
+    arr.info();
+
+    return 0;
+}
+
+#ifndef ARRAY_H
+#define ARRAY_H
+
+const int Max = 10;
+
+class Array
+{
+    public:
+    float data[Max];
+    int size;
+    Array();
+    void addArray(float x);
+    void delArray();
+    void info();
+    Array operator++();
+    Array operator++(int);
+    Array operator--();
+    Array operator--(int);
+};
+
+#endif
+
+#include "array.h"
+#include <iostream>
+
+Array::Array()
+{
+    size = 0;
+}
+
+void Array::addArray(float x)
+{
+    if(size < Max)
+    {
+        data[size] = x;
+        size++;
+    }else
+    {
+        std::cout << "Массив полон";
+    }
+}
+
+void Array::delArray()
+{
+    if(size > 0)
+    {
+        size--;
+    }else
+    {
+        std::cout << "Массив пуст";
+    }
+}
+
+void Array::info()
+{
+    for(int i = 0; i < size; i++)
+    {
+        std::cout << data[i] << " ";
+    }
+    std::cout << "\n";
+}
+Array Array::operator++()
+{
+    for(int i = 0; i < size; i++)
+    {
+        data[i] += 1;
+    }
+    return *this;
+}
+
+Array Array::operator++(int)
+{
+    Array temp = *this;
+    ++(*this);
+    return temp;
+}
+
+Array Array::operator--()
+{
+    for(int i = 0; i < size; i++)
+    {
+        data[i] -= 1;
+    }
+    return *this;
+}
+
+Array Array::operator--(int)
+{
+    Array temp = *this;
+    --(*this);
+    return temp;
+}
+
+
+
+
